@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mahesh | MonkFit — Personal Trainer & Nutritionist</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:       #1a1208;
+    --surface:  #211810;
+    --card:     #2a1f14;
+    --border:   #3d2e1e;
+    --accent:   #c8602a;
+    --accent2:  #e8956d;
+    --accent-light: #f0c9a8;
+    --text:     #f5ede0;
+    --muted:    #9e8a74;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body:    'DM Sans', sans-serif;
+    --font-italic:  'Playfair Display', serif;
+  }
+ 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+ 
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4vw;
+    background: rgba(26,18,8,0.88);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    transition: padding 0.3s ease, box-shadow 0.3s ease;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--text); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--accent);
+    color: #f5ede0;
+    padding: 0.5rem 1.3rem;
+    border-radius: 2px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.3s; }
+ 
+  /* ── HERO ── */
+  #hero {
+    min-height: 115vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 4vw;
+    padding-top: 80px;
+    padding-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-image {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1800&auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-position: center 30%;
+    will-change: transform;
+  }
+  .hero-bg-image::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to right, rgba(26,18,8,0.97) 45%, rgba(26,18,8,0.55) 75%, rgba(26,18,8,0.3) 100%),
+      linear-gradient(to bottom, rgba(26,18,8,0.4) 0%, transparent 30%, transparent 70%, rgba(26,18,8,0.85) 100%);
+  }
+  .hero-bg-text {
+    position: absolute;
+    font-family: var(--font-display);
+    font-size: clamp(120px, 22vw, 320px);
+    color: rgba(200,96,42,0.06);
+    letter-spacing: -0.02em;
+    top: 50%; left: -2vw;
+    transform: translateY(-50%);
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    z-index: 1;
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.4rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 32px; height: 1px; background: var(--accent);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+  }
+  h1 .line-accent { color: var(--accent); display: block; }
+  .hero-tagline {
+    font-size: 1.1rem; color: var(--muted); max-width: 420px;
+    line-height: 1.7; margin-bottom: 2.4rem; font-weight: 300;
+  }
+  .hero-tagline em { font-family: var(--font-italic); color: var(--text); font-style: italic; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: #f5ede0;
+    padding: 0.85rem 2rem; border-radius: 2px;
+    font-weight: 700; font-size: 0.85rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none; transition: 0.2s;
+  }
+  .btn-primary:hover { background: #b0521f; }
+  .btn-outline {
+    border: 1px solid var(--border); color: var(--text);
+    padding: 0.85rem 2rem; border-radius: 2px;
+    font-weight: 500; font-size: 0.85rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none; transition: 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--text); }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3rem;
+    padding-top: 2rem; border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: var(--font-display); font-size: 2.6rem;
+    line-height: 1; color: var(--text);
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+  .hero-visual {
+    position: relative; z-index: 2;
+    display: flex; justify-content: flex-end; align-items: center;
+  }
+  .hero-img-wrap {
+    position: relative; width: min(480px, 90%);
+  }
+  .hero-img-wrap img {
+    width: 100%; height: 580px; object-fit: cover;
+    border-radius: 4px;
+    filter: grayscale(15%);
+  }
+  .hero-img-badge {
+    position: absolute; bottom: -18px; left: -18px;
+    background: var(--accent); color: #f5ede0;
+    padding: 1rem 1.4rem; border-radius: 2px;
+    font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 0.08em;
+    line-height: 1.2;
+  }
+  .hero-img-badge small { display: block; font-family: var(--font-body); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; }
+  .hero-img-border {
+    position: absolute; top: -14px; right: -14px;
+    width: 100%; height: 100%; border: 1px solid rgba(200,96,42,0.5);
+    border-radius: 4px; z-index: -1;
+  }
+  .hero-noise {
+    position: absolute; inset: 0; z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; opacity: 0.3;
+  }
+  .hero-line {
+    position: absolute; right: 0; top: 0; bottom: 0; z-index: 2;
+    width: 1px; background: linear-gradient(to bottom, transparent, var(--border) 30%, var(--border) 70%, transparent);
+  }
+ 
+  /* ── SECTIONS ── */
+  section { padding: 6rem 4vw; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+  }
+  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    line-height: 0.95; letter-spacing: 0.01em; text-transform: uppercase;
+    margin-bottom: 1.4rem;
+  }
+  p.lead { font-size: 1.05rem; color: var(--muted); line-height: 1.75; max-width: 580px; }
+ 
+  /* ── ABOUT ── */
+  #about { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-img-stack { position: relative; }
+  .about-img-main img { width: 100%; height: 520px; object-fit: cover; border-radius: 4px; filter: grayscale(10%); }
+  .about-img-secondary {
+    position: absolute; bottom: -28px; right: -28px;
+    width: 200px; height: 240px; border-radius: 4px; overflow: hidden;
+    border: 3px solid var(--bg);
+  }
+  .about-img-secondary img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(10%); }
+  .about-accent-dot {
+    position: absolute; top: -12px; left: -12px;
+    width: 60px; height: 60px; background: var(--accent); border-radius: 50%;
+    opacity: 0.2;
+  }
+  .about-text h2 { margin-bottom: 1.2rem; }
+  .about-text .lead { margin-bottom: 1.4rem; }
+  .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.95rem; }
+  .about-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.8rem; }
+  .pill {
+    border: 1px solid var(--border); color: var(--muted);
+    padding: 0.4rem 0.9rem; border-radius: 100px;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em;
+  }
+  .pill.active { border-color: var(--accent); color: var(--accent2); background: rgba(200,96,42,0.08); }
+  .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 2.4rem; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .service-item {
+    background: var(--card); padding: 1.2rem 1.4rem;
+    display: flex; align-items: flex-start; gap: 0.9rem;
+  }
+  .service-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+  .service-title { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em; color: var(--text); }
+  .service-desc { font-size: 0.75rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+ 
+  /* ── PROGRAMS ── */
+  #programs { border-bottom: 1px solid var(--border); }
+  .programs-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+  .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .prog-card {
+    background: var(--card); padding: 2rem 1.8rem;
+    position: relative; overflow: hidden; transition: background 0.25s;
+  }
+  .prog-card:hover { background: #302318; }
+  .prog-card.featured { background: var(--accent); }
+  .prog-card.featured .prog-name, .prog-card.featured .prog-price, .prog-card.featured .prog-tagline { color: #f5ede0; }
+  .prog-card.featured .prog-feature { color: rgba(245,237,224,0.75); }
+  .prog-card.featured .prog-feature::before { color: #f5ede0; }
+  .prog-card.featured .prog-btn { background: #1a1208; color: var(--accent-light); }
+  .prog-number { font-family: var(--font-display); font-size: 4rem; opacity: 0.08; position: absolute; top: 1rem; right: 1.4rem; line-height: 1; color: inherit; }
+  .prog-name { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.06em; color: var(--text); margin-bottom: 0.3rem; }
+  .prog-tagline { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.4rem; font-weight: 300; }
+  .prog-price { font-family: var(--font-display); font-size: 2rem; color: var(--accent); margin-bottom: 1.4rem; }
+  .prog-card.featured .prog-price { color: #f5ede0; }
+  .prog-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
+  .prog-feature { font-size: 0.8rem; color: var(--muted); display: flex; align-items: center; gap: 0.5rem; }
+  .prog-feature::before { content: '✓'; color: var(--accent); font-weight: 700; font-size: 0.75rem; flex-shrink: 0; }
+  .prog-btn {
+    display: inline-block; background: var(--accent); color: #f5ede0;
+    padding: 0.7rem 1.6rem; border-radius: 2px;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none; transition: 0.2s;
+    border: none; cursor: pointer; width: 100%; text-align: center;
+  }
+  .prog-btn.outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .prog-btn.outline:hover { border-color: var(--accent2); color: var(--accent2); }
+  .prog-btn:hover { opacity: 0.85; }
+ 
+  /* ── GALLERY ── */
+  #gallery { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .gallery-intro { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: end; margin-bottom: 3rem; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    gap: 8px;
+  }
+  .gallery-item {
+    overflow: hidden; border-radius: 3px; position: relative;
+    cursor: pointer;
+  }
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .gallery-item:nth-child(5) { grid-column: span 2; }
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    min-height: 180px; display: block;
+    transition: transform 0.5s ease, filter 0.3s;
+    filter: grayscale(20%);
+  }
+  .gallery-item:hover img { transform: scale(1.05); filter: grayscale(0%); }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: flex-end; padding: 1rem;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+ 
+  /* ── TESTIMONIALS ── */
+  #testimonials { border-bottom: 1px solid var(--border); }
+  .testimonials-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 3rem; }
+  .testi-card { background: var(--card); padding: 2rem; position: relative; transition: background 0.2s; }
+  .testi-card:hover { background: #2e2218; }
+  .testi-stars { display: flex; gap: 3px; margin-bottom: 1rem; }
+  .testi-stars span { color: var(--accent); font-size: 0.85rem; }
+  .testi-quote { font-size: 0.92rem; line-height: 1.7; color: var(--muted); margin-bottom: 1.4rem; font-weight: 300; }
+  .testi-quote em { color: var(--text); font-style: normal; font-weight: 500; }
+  .testi-author { display: flex; align-items: center; gap: 0.9rem; }
+  .testi-avatar { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; filter: grayscale(20%); }
+  .testi-name { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+  .testi-meta { font-size: 0.72rem; color: var(--muted); margin-top: 1px; }
+  .testi-result {
+    position: absolute; top: 1.4rem; right: 1.4rem;
+    background: rgba(200,96,42,0.12); border: 1px solid rgba(200,96,42,0.3);
+    color: var(--accent2); padding: 0.25rem 0.6rem; border-radius: 100px;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+  }
+  .clients-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+  }
+  .client-card { background: var(--card); padding: 0; overflow: hidden; }
+  .client-before-after { display: grid; grid-template-columns: 1fr 1fr; height: 220px; }
+  .client-side { position: relative; overflow: hidden; }
+  .client-side img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .client-side-label {
+    position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,0.75); color: var(--muted);
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 100px;
+  }
+  .client-side-label.after { background: var(--accent); color: #0a0a0a; }
+  .client-info { padding: 0.8rem; }
+  .client-name { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+  .client-result { font-size: 0.7rem; color: var(--accent); margin-top: 2px; }
+ 
+  /* ── CONTACT ── */
+  #contact { background: var(--surface); border-top: 1px solid var(--border); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
+  .contact-info h2 { margin-bottom: 1rem; }
+  .contact-info .lead { margin-bottom: 2rem; }
+  .contact-detail { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.4rem; }
+  .contact-icon { width: 42px; height: 42px; background: var(--border); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .contact-detail-label { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px; }
+  .contact-detail-val { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+  .contact-social { display: flex; gap: 0.8rem; margin-top: 2rem; }
+  .social-btn {
+    width: 42px; height: 42px; background: var(--border); border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; text-decoration: none; transition: 0.2s;
+  }
+  .social-btn:hover { background: var(--accent); }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .form-input, .form-select, .form-textarea {
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--text); padding: 0.85rem 1rem; border-radius: 3px;
+    font-family: var(--font-body); font-size: 0.9rem;
+    outline: none; transition: border-color 0.2s; resize: none;
+    -webkit-appearance: none;
+  }
+  .form-input::placeholder, .form-textarea::placeholder { color: var(--muted); }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
+  .form-select option { background: var(--card); }
+  .form-textarea { height: 120px; }
+  .form-submit {
+    background: var(--accent); color: #f5ede0; border: none; cursor: pointer;
+    padding: 1rem 2rem; border-radius: 2px;
+    font-family: var(--font-body); font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; transition: 0.2s;
+    margin-top: 0.4rem;
+  }
+  .form-submit:hover { background: #b0521f; }
+ 
+  /* ── FOOTER ── */
+  footer {
+    background: #050505; border-top: 1px solid var(--border);
+    padding: 2.5rem 4vw;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: gap;
+  }
+  .footer-logo { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.12em; color: var(--accent); }
+  .footer-logo span { color: var(--muted); }
+  .footer-copy { font-size: 0.75rem; color: var(--muted); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 0.75rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--accent); }
+ 
+  /* ── DIVIDER ── */
+  .divider { width: 100%; height: 1px; background: var(--border); }
+ 
+  /* ── MARQUEE ── */
+  .marquee-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem 0; background: var(--surface); }
+  .marquee-track { display: flex; gap: 3rem; animation: marquee 20s linear infinite; width: max-content; }
+  .marquee-item { font-family: var(--font-display); font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 1.5rem; white-space: nowrap; }
+  .marquee-dot { color: var(--accent2); font-size: 1.2rem; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+ 
+  /* ── SCROLL FADE ── */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+ 
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    #hero { grid-template-columns: 1fr; padding-top: 100px; gap: 3rem; min-height: 100svh; }
+    .hero-visual { justify-content: center; }
+    .hero-img-wrap { width: 90%; }
+    .hero-img-wrap img { height: 420px; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-img-secondary { display: none; }
+    .programs-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .programs-grid { grid-template-columns: 1fr; }
+    .gallery-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+    .gallery-item:nth-child(5) { grid-column: span 2; }
+    .testimonials-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .clients-strip { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 2rem 4vw; flex-direction: column; gap: 1.4rem; z-index: 99;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--text); text-decoration: none; font-size: 1rem; font-weight: 500; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 4rem 4vw; }
+    .hero-stats { gap: 1.5rem; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .clients-strip { grid-template-columns: 1fr 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+ 
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">MONK<span>FIT</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#testimonials">Clients</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book a Call</a>
+  <div class="hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="#about" onclick="this.closest('.mobile-menu').classList.remove('open')">About</a>
+  <a href="#programs" onclick="this.closest('.mobile-menu').classList.remove('open')">Programs</a>
+  <a href="#gallery" onclick="this.closest('.mobile-menu').classList.remove('open')">Gallery</a>
+  <a href="#testimonials" onclick="this.closest('.mobile-menu').classList.remove('open')">Clients</a>
+  <a href="#contact" onclick="this.closest('.mobile-menu').classList.remove('open')">Book a Call</a>
+</div>
+ 
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-image"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-bg-text">FIT</div>
+  <div class="hero-content fade-in">
+    <div class="hero-eyebrow">Personal Trainer & Nutritionist</div>
+    <h1>
+      SCULPT<br>
+      YOUR<br>
+      <span class="line-accent">BEST SELF.</span>
+    </h1>
+    <p class="hero-tagline">
+      <em>Transform your body, rewire your habits.</em><br>
+      Expert personal training & nutrition coaching — online &amp; offline — designed around your life, not a template.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Start Your Journey</a>
+      <a href="#programs" class="btn-outline">View Programs</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">200<span>+</span></div>
+        <div class="stat-label">Transformations</div>
+      </div>
+      <div>
+        <div class="stat-num">5<span>+</span></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="stat-num">98<span>%</span></div>
+        <div class="stat-label">Client Retention</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual fade-in" style="transition-delay:0.15s">
+    <div class="hero-img-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=900&auto=format&fit=crop&q=80"
+        alt="Mahesh — MonkFit Trainer"
+      />
+      <div class="hero-img-badge">
+        <small>Certified by</small>
+        ACE · ISSA
+      </div>
+      <div class="hero-img-border"></div>
+    </div>
+  </div>
+  <div class="hero-line"></div>
+</section>
+ 
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Personal Training <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Body Transformation <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Nutrition Coaching <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Online Programs <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Offline Training <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Daily Follow-ups <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Meal Plan Design <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Mindset Coaching <span class="marquee-dot">✦</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item">Personal Training <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Body Transformation <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Nutrition Coaching <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Online Programs <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Offline Training <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Daily Follow-ups <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Meal Plan Design <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Mindset Coaching <span class="marquee-dot">✦</span></div>
+  </div>
+</div>
+ 
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-stack fade-in">
+      <div class="about-accent-dot"></div>
+      <div class="about-img-main">
+        <img
+          src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=700&auto=format&fit=crop&q=80"
+          alt="Mahesh training"
+        />
+      </div>
+      <div class="about-img-secondary">
+        <img
+          src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?w=400&auto=format&fit=crop&q=80"
+          alt="Nutrition planning"
+        />
+      </div>
+    </div>
+    <div class="about-text fade-in" style="transition-delay:0.15s">
+      <div class="section-label">About Mahesh</div>
+      <h2>MONK<br>MINDSET.<br>FIT BODY.</h2>
+      <p class="lead">I'm Mahesh, founder of <strong style="color:var(--text)">MonkFit</strong> — a certified personal trainer and nutritionist helping everyday people achieve extraordinary body transformations.</p>
+      <p>With over 5 years of hands-on coaching experience, I've helped 200+ clients — from desk-bound software professionals to working parents — rebuild their bodies and reclaim their energy.</p>
+      <p>My philosophy is simple: <strong style="color:var(--text)">consistency beats intensity</strong>. No crash diets. No brutal regimes. Just science-backed training, personalised nutrition, and daily accountability that fits your real life.</p>
+      <p>Online or offline, India or abroad — I'm in your corner every single day.</p>
+      <div class="about-pills">
+        <span class="pill active">Certified Personal Trainer</span>
+        <span class="pill active">Certified Nutritionist</span>
+        <span class="pill">Strength Training</span>
+        <span class="pill">Fat Loss Specialist</span>
+        <span class="pill">Online Coaching</span>
+        <span class="pill">Muscle Building</span>
+      </div>
+      <div class="services-grid">
+        <div class="service-item">
+          <div class="service-icon">🏋️</div>
+          <div><div class="service-title">Strength & Conditioning</div><div class="service-desc">Progressive overload plans built for your body type and goals.</div></div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">🥗</div>
+          <div><div class="service-title">Custom Nutrition Plans</div><div class="service-desc">Flexible meal plans that adapt to your schedule and food preferences.</div></div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">📈</div>
+          <div><div class="service-title">Daily Progress Tracking</div><div class="service-desc">Real-time updates, check-ins, and adjustments every single day.</div></div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">💬</div>
+          <div><div class="service-title">24/7 WhatsApp Support</div><div class="service-desc">Always reachable at +91 9505818494 for guidance and motivation.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="programs-header fade-in">
+    <div>
+      <div class="section-label">Programs</div>
+      <h2>CHOOSE YOUR<br>TRANSFORMATION</h2>
+    </div>
+    <p style="color:var(--muted);font-size:0.9rem;max-width:320px;text-align:right">Every program includes a doctor assessment, nutritionist consultation, and a certified trainer — all in one.</p>
+  </div>
+  <div class="programs-grid fade-in" style="transition-delay:0.1s">
+    <!-- STARTER -->
+    <div class="prog-card">
+      <div class="prog-number">01</div>
+      <div class="prog-name">STARTER PACK</div>
+      <div class="prog-tagline">Perfect for beginners — build the foundation</div>
+      <div class="prog-price">₹2,499<small style="font-size:1rem;opacity:0.6">/mo</small></div>
+      <ul class="prog-features">
+        <li class="prog-feature">Initial fitness assessment</li>
+        <li class="prog-feature">Custom 30-day workout plan</li>
+        <li class="prog-feature">Basic nutrition guidelines</li>
+        <li class="prog-feature">Weekly check-in calls</li>
+        <li class="prog-feature">WhatsApp support (weekdays)</li>
+      </ul>
+      <a href="#contact" class="prog-btn outline">Get Started</a>
+    </div>
+    <!-- TRANSFORM — FEATURED -->
+    <div class="prog-card featured">
+      <div class="prog-number" style="opacity:0.15">02</div>
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.6rem;opacity:0.6">Most Popular</div>
+      <div class="prog-name">TRANSFORM PRO</div>
+      <div class="prog-tagline">Complete 12-week body transformation program</div>
+      <div class="prog-price">₹4,999<small style="font-size:1rem;opacity:0.6">/mo</small></div>
+      <ul class="prog-features">
+        <li class="prog-feature">Doctor + nutritionist + trainer assessment</li>
+        <li class="prog-feature">Fully personalised workout + meal plan</li>
+        <li class="prog-feature">Daily progress tracking &amp; updates</li>
+        <li class="prog-feature">Meal plan modifications on the go</li>
+        <li class="prog-feature">24/7 WhatsApp support</li>
+        <li class="prog-feature">Bi-weekly video calls</li>
+      </ul>
+      <a href="#contact" class="prog-btn">Enroll Now</a>
+    </div>
+    <!-- ELITE -->
+    <div class="prog-card">
+      <div class="prog-number">03</div>
+      <div class="prog-name">ELITE 1-ON-1</div>
+      <div class="prog-tagline">Dedicated in-person or live online coaching</div>
+      <div class="prog-price">₹8,999<small style="font-size:1rem;opacity:0.6">/mo</small></div>
+      <ul class="prog-features">
+        <li class="prog-feature">Everything in Transform Pro</li>
+        <li class="prog-feature">Live 1-on-1 training sessions</li>
+        <li class="prog-feature">Stress &amp; recovery management</li>
+        <li class="prog-feature">Supplement guidance</li>
+        <li class="prog-feature">Priority response &amp; daily calls</li>
+        <li class="prog-feature">Unlimited plan revisions</li>
+      </ul>
+      <a href="#contact" class="prog-btn outline">Book a Call</a>
+    </div>
+  </div>
+</section>
+ 
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-intro fade-in">
+    <div>
+      <div class="section-label">Gallery</div>
+      <h2>REAL<br>RESULTS.</h2>
+    </div>
+    <p class="lead">Every image tells a story of discipline, consistency, and transformation. These are real sessions, real clients, real results — captured in the gym and beyond.</p>
+  </div>
+  <div class="gallery-grid fade-in" style="transition-delay:0.1s">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=800&auto=format&fit=crop&q=80" alt="Training session"/>
+      <div class="gallery-overlay"><span class="gallery-label">Training Floor</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&auto=format&fit=crop&q=80" alt="Client transformation"/>
+      <div class="gallery-overlay"><span class="gallery-label">Client Progress</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=80" alt="Gym session"/>
+      <div class="gallery-overlay"><span class="gallery-label">Strength Work</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&auto=format&fit=crop&q=80" alt="Weight training"/>
+      <div class="gallery-overlay"><span class="gallery-label">Weight Training</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&auto=format&fit=crop&q=80" alt="Nutrition planning"/>
+      <div class="gallery-overlay"><span class="gallery-label">Nutrition Session</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&auto=format&fit=crop&q=80" alt="Yoga & Flexibility"/>
+      <div class="gallery-overlay"><span class="gallery-label">Flexibility & Core</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba?w=600&auto=format&fit=crop&q=80" alt="Cardio training"/>
+      <div class="gallery-overlay"><span class="gallery-label">Cardio & HIIT</span></div>
+    </div>
+  </div>
+</section>
+ 
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-header fade-in">
+    <div>
+      <div class="section-label">Client Stories</div>
+      <h2>WHAT CLIENTS<br>ARE SAYING</h2>
+    </div>
+    <a href="https://www.instagram.com/monkfit.in/" target="_blank" class="btn-outline" style="font-size:0.75rem;padding:0.6rem 1.4rem">Follow @monkfit.in ↗</a>
+  </div>
+ 
+  <div class="testimonials-grid fade-in" style="transition-delay:0.1s">
+    <!-- T1 -->
+    <div class="testi-card">
+      <div class="testi-result">−18 kg</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">
+        "I'd tried dozens of diets before MonkFit. Nothing stuck. Mahesh gave me a <em>real plan</em> — food I actually enjoy, workouts I can do after a 9-hour shift. I lost 18 kg in 14 weeks and I genuinely look forward to the gym now."
+      </p>
+      <div class="testi-author">
+        <img class="testi-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80" alt="Priya S"/>
+        <div>
+          <div class="testi-name">Priya S.</div>
+          <div class="testi-meta">Software Engineer · Hyderabad</div>
+        </div>
+      </div>
+    </div>
+    <!-- T2 -->
+    <div class="testi-card">
+      <div class="testi-result">+8 kg Muscle</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">
+        "As a skinny guy who had given up on building muscle, Mahesh's structured strength program changed everything. <em>Daily check-ins keep me accountable</em> and his nutrition tweaks made the biggest difference. I'm up 8 kg of lean mass."
+      </p>
+      <div class="testi-author">
+        <img class="testi-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Arun K"/>
+        <div>
+          <div class="testi-name">Arun K.</div>
+          <div class="testi-meta">Product Manager · Bengaluru</div>
+        </div>
+      </div>
+    </div>
+    <!-- T3 -->
+    <div class="testi-card">
+      <div class="testi-result">Full Lifestyle Reset</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">
+        "I'm based in the US and doing online coaching with Mahesh. The time zone difference is never a problem — he's always there. <em>His holistic approach</em> fixed my sleep, energy, and stress, not just my physique. Worth every rupee."
+      </p>
+      <div class="testi-author">
+        <img class="testi-avatar" src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=100&auto=format&fit=crop&q=80" alt="Deepika R"/>
+        <div>
+          <div class="testi-name">Deepika R.</div>
+          <div class="testi-meta">Data Scientist · Austin, USA</div>
+        </div>
+      </div>
+    </div>
+    <!-- T4 -->
+    <div class="testi-card">
+      <div class="testi-result">−22 kg</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">
+        "Post-pregnancy weight loss felt impossible. Mahesh designed a program that respected my recovery, gave me <em>safe but effective</em> workouts, and a meal plan my whole family can eat. I'm back to my pre-pregnancy weight — actually better."
+      </p>
+      <div class="testi-author">
+        <img class="testi-avatar" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&auto=format&fit=crop&q=80" alt="Meena V"/>
+        <div>
+          <div class="testi-name">Meena V.</div>
+          <div class="testi-meta">Teacher · Vijayawada</div>
+        </div>
+      </div>
+    </div>
+    <!-- T5 -->
+    <div class="testi-card">
+      <div class="testi-result">Body Recomp</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">
+        "I travel for work constantly — hotels, airports, irregular meals. Mahesh's flexible approach meant <em>my plan moved with me</em>. No excuses accepted, no rigidity either. Best investment I've made for my health in years."
+      </p>
+      <div class="testi-author">
+        <img class="testi-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80" alt="Ravi T"/>
+        <div>
+          <div class="testi-name">Ravi T.</div>
+          <div class="testi-meta">Consultant · Mumbai</div>
+        </div>
+      </div>
+    </div>
+    <!-- T6 -->
+    <div class="testi-card">
+      <div class="testi-result">−15 kg in 10 weeks</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">
+        "The doctor + nutritionist + trainer package is genuinely next-level. I got blood work assessed, a customised diet, and a progressive workout plan — <em>all in one seamless program</em>. The daily updates kept me honest. 100% recommend."
+      </p>
+      <div class="testi-author">
+        <img class="testi-avatar" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop&q=80" alt="Suresh M"/>
+        <div>
+          <div class="testi-name">Suresh M.</div>
+          <div class="testi-meta">Entrepreneur · Chennai</div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- Client Before/After Strip -->
+  <div class="section-label fade-in" style="margin-top:3rem;margin-bottom:1.2rem">Transformations</div>
+  <div class="clients-strip fade-in" style="transition-delay:0.1s">
+    <div class="client-card">
+      <div class="client-before-after">
+        <div class="client-side">
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&auto=format&fit=crop&q=80" alt="Before"/>
+          <span class="client-side-label">Before</span>
+        </div>
+        <div class="client-side">
+          <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=300&auto=format&fit=crop&q=80" alt="After"/>
+          <span class="client-side-label after">After</span>
+        </div>
+      </div>
+      <div class="client-info">
+        <div class="client-name">Anil R. — 12 weeks</div>
+        <div class="client-result">Lost 14 kg · Gained core strength</div>
+      </div>
+    </div>
+    <div class="client-card">
+      <div class="client-before-after">
+        <div class="client-side">
+          <img src="https://images.unsplash.com/photo-1609899537878-cbb98e8f06c5?w=300&auto=format&fit=crop&q=80" alt="Before"/>
+          <span class="client-side-label">Before</span>
+        </div>
+        <div class="client-side">
+          <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=300&auto=format&fit=crop&q=80" alt="After"/>
+          <span class="client-side-label after">After</span>
+        </div>
+      </div>
+      <div class="client-info">
+        <div class="client-name">Kavitha S. — 16 weeks</div>
+        <div class="client-result">Lost 22 kg · Full body recomp</div>
+      </div>
+    </div>
+    <div class="client-card">
+      <div class="client-before-after">
+        <div class="client-side">
+          <img src="https://images.unsplash.com/photo-1613979828429-e44f4df40b56?w=300&auto=format&fit=crop&q=80" alt="Before"/>
+          <span class="client-side-label">Before</span>
+        </div>
+        <div class="client-side">
+          <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=300&auto=format&fit=crop&q=80" alt="After"/>
+          <span class="client-side-label after">After</span>
+        </div>
+      </div>
+      <div class="client-info">
+        <div class="client-name">Rahul D. — 10 weeks</div>
+        <div class="client-result">+9 kg muscle · Improved posture</div>
+      </div>
+    </div>
+    <div class="client-card">
+      <div class="client-before-after">
+        <div class="client-side">
+          <img src="https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?w=300&auto=format&fit=crop&q=80" alt="Before"/>
+          <span class="client-side-label">Before</span>
+        </div>
+        <div class="client-side">
+          <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=300&auto=format&fit=crop&q=80" alt="After"/>
+          <span class="client-side-label after">After</span>
+        </div>
+      </div>
+      <div class="client-info">
+        <div class="client-name">Sneha P. — 14 weeks</div>
+        <div class="client-result">Lost 18 kg · Back to pre-pregnancy weight</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info fade-in">
+      <div class="section-label">Get In Touch</div>
+      <h2>START YOUR<br>TRANSFORMATION<br>TODAY.</h2>
+      <p class="lead">Ready to change your body and your life? Book a free 20-minute discovery call — no pressure, just a conversation.</p>
+      <div class="contact-detail">
+        <div class="contact-icon">📱</div>
+        <div>
+          <div class="contact-detail-label">WhatsApp / Call</div>
+          <div class="contact-detail-val">+91 9505818494</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📸</div>
+        <div>
+          <div class="contact-detail-label">Instagram</div>
+          <div class="contact-detail-val">@monkfit.in</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">🌐</div>
+        <div>
+          <div class="contact-detail-label">Website</div>
+          <div class="contact-detail-val">monkfit.in</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-detail-label">Location</div>
+          <div class="contact-detail-val">Andhra Pradesh, India<br><span style="color:var(--muted);font-size:0.8rem">Online coaching worldwide</span></div>
+        </div>
+      </div>
+      <div class="contact-social">
+        <a href="https://www.instagram.com/monkfit.in/" target="_blank" class="social-btn" title="Instagram">📸</a>
+        <a href="https://wa.me/919505818494" target="_blank" class="social-btn" title="WhatsApp">💬</a>
+        <a href="https://monkfit.in" target="_blank" class="social-btn" title="Website">🌐</a>
+      </div>
+    </div>
+    <div class="fade-in" style="transition-delay:0.15s">
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-input" placeholder="Rahul" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-input" placeholder="Sharma"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="rahul@example.com" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone / WhatsApp</label>
+          <input type="tel" class="form-input" placeholder="+91 9876543210"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Goal</label>
+          <select class="form-select form-input">
+            <option value="" disabled selected>Select your primary goal</option>
+            <option>Fat Loss / Weight Loss</option>
+            <option>Muscle Building</option>
+            <option>Body Recomposition</option>
+            <option>General Fitness & Health</option>
+            <option>Sports Performance</option>
+            <option>Post-Pregnancy Recovery</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Preferred Program</label>
+          <select class="form-select form-input">
+            <option value="" disabled selected>Online or Offline?</option>
+            <option>Online Coaching</option>
+            <option>Offline / In-Person Training</option>
+            <option>Both (Hybrid)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tell Me About Yourself</label>
+          <textarea class="form-textarea" placeholder="Where are you now? What's your main challenge? Any injuries or medical conditions I should know about?"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message — Let's Begin 🔥</button>
+      </form>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">MONK<span>FIT</span></div>
+  <p class="footer-copy">© 2025 MonkFit by Mahesh. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#programs">Programs</a>
+    <a href="#contact">Contact</a>
+    <a href="https://www.instagram.com/monkfit.in/" target="_blank">Instagram</a>
+  </div>
+</footer>
+ 
+<script>
+  // ── Scroll-fade observer ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+ 
+  // ── Smooth scroll with easing for all nav/anchor links ──
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+  }
+ 
+  function smoothScrollTo(targetY, duration) {
+    const startY = window.scrollY;
+    const diff = targetY - startY;
+    let startTime = null;
+ 
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = easeInOutCubic(progress);
+      window.scrollTo(0, startY + diff * ease);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+ 
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      const navHeight = document.querySelector('nav').offsetHeight;
+      const targetY = target.getBoundingClientRect().top + window.scrollY - navHeight;
+      smoothScrollTo(targetY, 900);
+      // close mobile menu if open
+      document.querySelector('.mobile-menu')?.classList.remove('open');
+    });
+  });
+ 
+  // ── Active nav link highlight on scroll ──
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const navHeight = document.querySelector('nav').offsetHeight;
+ 
+  function updateActiveLink() {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - navHeight - 60) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current
+        ? 'var(--accent2)' : '';
+    });
+  }
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+ 
+  // ── Subtle parallax on hero bg ──
+  const heroBg = document.querySelector('.hero-bg-image');
+  window.addEventListener('scroll', () => {
+    if (!heroBg) return;
+    const scrolled = window.scrollY;
+    heroBg.style.transform = `translateY(${scrolled * 0.3}px)`;
+  }, { passive: true });
+ 
+  // ── Nav shrink on scroll ──
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      nav.style.padding = '0.7rem 4vw';
+      nav.style.boxShadow = '0 4px 32px rgba(0,0,0,0.35)';
+    } else {
+      nav.style.padding = '1.2rem 4vw';
+      nav.style.boxShadow = 'none';
+    }
+  }, { passive: true });
+ 
+  // ── Form submit ──
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '✅ Message Sent! Mahesh will be in touch soon.';
+    btn.style.background = 'var(--card)';
+    btn.style.color = 'var(--accent2)';
+    btn.style.border = '1px solid var(--border)';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
